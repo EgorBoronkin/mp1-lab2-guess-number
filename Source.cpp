@@ -4,80 +4,81 @@
 void main()
 {
 	srand(time(NULL));
-	int a, b, d, c, p, q, r;
+	int modes, random, user, count, answer_for_pc, max, min;
 	printf("Program have 2 modes \n");
 	printf("First mode : program have a number from 1 to 1000, user need guess this number, program write <, >, or = \n");
 	printf("When user choose right number - program complete \n");
 	printf("Second: User have a number from 1 to 1000, program try guess, user write <, >, or = \n");
 	printf("When program choose right number - program complete \n");
 	printf("Choose first or second mode: ");
-	scanf_s("%i", &a);
-	while(2 < a || a == 0)
+	scanf_s("%i", &modes);
+	while (2 < modes || modes == 0)
 	{
 		printf("Wrong mode. Try to choose your mode one more time: ");
-		scanf_s("%i", &a);
+		scanf_s("%i", &modes);
 	}
-	if (a == 1)
+	if (modes == 1)
 	{
-		b = 1 + rand() % (1000 - 1 + 1);
-		c = 1;
+		random = 1 + rand() % (1000 - 1 + 1);
+		printf("%i \n", random);
+		count = 1;
 		printf("First program \n");
 		printf("Guess a number: ");
-		scanf_s("%i", &d);
-		while (d != b)
+		scanf_s("%i", &user);
+		while (user != random)
 		{
-			if (d < b)
-			{
-				printf("< \n");
-				printf("Guess a number one more time: ");
-				scanf_s("%i", &d);
-				c += 1;
-			}
-			else if (d > b)
+			if (user < random)
 			{
 				printf("> \n");
 				printf("Guess a number one more time: ");
-				scanf_s("%i", &d);
-				c += 1;
+				scanf_s("%i", &user);
+				count += 1;
+			}
+			else if (user > random)
+			{
+				printf("< \n");
+				printf("Guess a number one more time: ");
+				scanf_s("%i", &user);
+				count += 1;
 			}
 		}
 		printf("= \n");
-		printf("Number of attempts - %i", c);
+		printf("Number of attempts - %i", count);
 	}
 	else
 	{
 		printf("Second program(Info for user. 1 - <, 2 - >, 3 - =) \n");
-		printf("Write a number: ");
-		scanf_s("%i", &d);
-		b = 1 + rand() % (1000 - 1 + 1);
-		c = 1;
-		q = 1000;
-		r = 1;
-		printf("Computer: is it %i? \n", b);
+		printf("Write a number: \n");
+		scanf_s("%i", &user);
+		random = 1 + rand() % (1000 - 1 + 1);
+		count = 1;
+		max = 1000;
+		min = 1;
+		printf("Computer: is it %i? \n", random);
 		printf("Answer for computer: ");
-		scanf_s("%i", &p);
-		while (p != 3)
+		scanf_s("%i", &answer_for_pc);
+		while (answer_for_pc != 3)
 		{
-			if (p == 1)
+			if (answer_for_pc == 1)
 			{
-				q = b - 1;
-				b = r + rand() % (q - r + 1);
-				c += 1;
-				printf("Computer: is it %i? \n", b);
+				max = random - 1;
+				random = min + rand() % (max - min + 1);
+				count += 1;
+				printf("Computer: is it %i? \n", random);
 				printf("Answer for computer: ");
-				scanf_s("%i", &p);
+				scanf_s("%i", &answer_for_pc);
 			}
-			if (p == 2)
+			if (answer_for_pc == 2)
 			{
-				r = b + 1;
-				b = r + rand() % (q - r + 1);
-				c += 1;
-				printf("Computer: is it %i? \n", b);
+				min = random + 1;
+				random = min + rand() % (max - min + 1);
+				count += 1;
+				printf("Computer: is it %i? \n", random);
 				printf("Answer for computer: ");
-				scanf_s("%i", &p);
+				scanf_s("%i", &answer_for_pc);
 			}
 		}
 		printf("= \n");
-		printf("Number of attempts - %i", c);
+		printf("Number of attempts - %i", count);
 	}
 }
